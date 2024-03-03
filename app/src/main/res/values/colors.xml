@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#170C10</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="peach">#f79aaf</color>
+    <color name="peach2">#dd9faf</color>
+    <color name="brown2">#8e4256</color>
+    <color name="brown">#6a3f4a</color>
+    <color name="pinkLight">#6a3f4a</color>
+    <color name="pink">#ff94e0</color>
+    <color name="midPink">#ff76d8</color>
+    <color name="babyPink">#ff59c7</color>
+    <color name="dark">#000000</color>
+    <color name="tv_bg">#170C10</color>
+    <color name="green">#1D4F46</color>
+    <color name="yellow">#CEA517</color>
+    <color name="green_pressed">#1D4F46</color> <!-- Change to your desired pressed color -->
+    <color name="green_default">#ABE6E8E6</color> <!-- Change to your desired default color -->
+
+</resources>

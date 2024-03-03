@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">POS</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="print_bills">Print Bills</string>
+
+    <string-array name="discount_options">
+        <item>None</item>
+        <item>Senior Citizen</item>
+        <item>PWD</item>
+        <item>Student</item>
+    </string-array>
+</resources>

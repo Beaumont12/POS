@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/landingpage">
+
+    <fragment
+        android:id="@+id/landingpage"
+        android:name="com.example.pos.LandingFragment"
+        android:label="fragment_landing"
+        tools:layout="@layout/fragment_landing" />
+    <fragment
+        android:id="@+id/orderpage"
+        android:name="com.example.pos.Order"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/historypage"
+        android:name="com.example.pos.History"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/settingspage"
+        android:name="com.example.pos.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/tumblerspage"
+        android:name="com.example.pos.Tumblers"
+        android:label="fragment_tumblers"
+        tools:layout="@layout/fragment_tumblers" />
+</navigation>

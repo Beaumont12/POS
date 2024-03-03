@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="395dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:padding="8dp"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardBackgroundColor="#F1EFEF">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="#F2F1F3"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/add_cart"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="280dp"
+            android:src="@drawable/cart"
+            android:elevation="1dp"
+            android:background="@drawable/circle_add_cart"/>
+        <View
+            android:id="@+id/blank"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/item_image"
+            android:layout_width="325dp"
+            android:layout_height="150dp"
+            android:src="@drawable/whitemochafrappe"
+            android:layout_below="@id/blank"
+            android:scaleType="fitCenter"
+            app:shapeAppearanceOverlay="@style/roundedbg"
+            android:layout_gravity="center_horizontal"/>
+
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/text_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_below="@id/item_image"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/text_prices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_alignBaseline="@id/text_product_name"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"/>
+
+        <!-- Category -->
+        <TextView
+            android:id="@+id/text_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_below="@id/text_product_name"
+            android:layout_marginTop="5dp"/>
+
+        <!-- Button to switch between hot and iced variations -->
+        <Button
+            android:id="@+id/button_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hot"
+            android:elevation="10dp"
+            android:layout_marginStart="75dp"
+            android:layout_below="@id/text_category"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/button_iced"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Iced"
+            android:elevation="10dp"
+            android:layout_below="@id/text_category"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/button_hot"/>
+
+        <!-- Container for size buttons -->
+        <LinearLayout
+            android:layout_marginStart="35dp"
+            android:id="@+id/size_buttons_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/button_hot"
+            android:layout_marginTop="8dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

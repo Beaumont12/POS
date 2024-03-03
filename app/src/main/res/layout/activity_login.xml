@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login"
+    android:gravity="center"
+    android:background="@drawable/bglogin">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="800dp"
+        android:layout_height="500dp"
+        app:cardCornerRadius="40dp"
+        app:cardBackgroundColor="#C8D9D9D9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/poppins"
+                android:padding="15dp"
+                android:text="Winzen's Cafe"
+                android:textColor="#203A36"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login to your account"
+                android:layout_margin="10dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins"/>
+
+            <EditText
+                android:id="@+id/id_field"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_bg"
+                android:hint="Staff ID"
+                android:layout_marginBottom="15dp"
+                android:foregroundGravity="center_horizontal"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:paddingStart="10dp"/>
+
+            <EditText
+                android:id="@+id/email_field"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_bg"
+                android:hint="Email"
+                android:drawablePadding="10dp"
+                android:foregroundGravity="center_horizontal"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:paddingStart="10dp"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+
+                <EditText
+                    android:id="@+id/password_field"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search_bg"
+                    android:hint="Password"
+                    android:drawablePadding="10dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:drawableStart="@drawable/baseline_lock_24"
+                    android:paddingStart="10dp"/>
+
+                <View
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"/>
+
+                <ImageButton
+                    android:id="@+id/see_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_remove_red_eye_24"
+                    android:background="#00FFFFFF"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="15dp"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/login_button"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/print_button"
+                android:text="Login"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

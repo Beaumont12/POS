@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Button pressed state -->
+    <item android:state_checked="true" android:drawable="@color/green_pressed" />
+    <!-- Button default state -->
+    <item android:state_checked="false" android:drawable="@color/green_default" />
+</selector>

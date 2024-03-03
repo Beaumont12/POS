@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.POS" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+            <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="android:statusBarColor">@color/green</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="Theme.POS" parent="Base.Theme.POS" />
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/yellow</item>
+    </style>
+
+    <style name="DineInButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:background">@drawable/preference_button</item> <!-- Define your selector drawable -->
+        <item name="android:textColor">@color/white</item> <!-- Define text color -->
+    </style>
+
+    <style name="TakeOutButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:background">@drawable/preference_button</item> <!-- Define your selector drawable -->
+        <item name="android:textColor">@color/white</item> <!-- Define text color -->
+    </style>
+
+</resources>

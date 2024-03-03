@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "910317765447",
+    "project_id": "wenzinpossystem",
+    "storage_bucket": "wenzinpossystem.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910317765447:android:15a62b36bacf728b0d4262",
+        "android_client_info": {
+          "package_name": "com.example.pos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHyIDgjNQ8Df46adLPbdQijlWaDy7UHgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
