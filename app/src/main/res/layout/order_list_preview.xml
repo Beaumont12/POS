@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="320dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:padding="5dp"
@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/text_product_name"
-                android:layout_width="120dp"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:maxLines="2"

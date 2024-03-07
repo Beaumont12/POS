@@ -8,14 +8,18 @@
     tools:context=".MainActivity">
 
     <FrameLayout
+        android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/frame_container"/>
+        app:layout_constraintBottom_toTopOf="@+id/bot_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bot_nav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:background="@color/black"
         app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
         app:itemIconSize="30dp"

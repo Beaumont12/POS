@@ -3,13 +3,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Settings">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Settings"
+    android:background="@color/white"
+    android:layout_gravity="center">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="SETTINGS PAGE"
-        android:textSize="36sp"
-        android:gravity="center"/>
+        android:layout_height="550dp"
+        android:padding="20dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_gravity="center_vertical"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="150dp"
+                    android:layout_margin="20dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/imagetest"
+                    android:scaleType="fitXY"
+                    app:shapeAppearanceOverlay="@style/circlebg"
+                    android:layout_gravity="center_horizontal"/>
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/edit_text_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/edit_text"
+                    android:layout_marginTop="-55dp"
+                    android:layout_marginStart="45dp"
+                    app:shapeAppearanceOverlay="@style/circlebg" />
+
+                <TextView
+                    android:id="@+id/staff_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Relgin Paloma"
+                    android:layout_marginTop="20dp"
+                    android:textFontWeight="900"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cashier"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"/>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="5dp">
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
 </FrameLayout>

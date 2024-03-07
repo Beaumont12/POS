@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:gravity="center"
-    android:padding="20dp"
+    android:padding="10dp"
     tools:context=".Order">
 
     <LinearLayout
@@ -39,7 +39,7 @@
                 android:background="@drawable/search_bg"
                 android:drawableStart="@drawable/baseline_search_24"
                 android:elevation="12dp"
-                android:ems="22"
+                android:ems="17"
                 android:hint=" Search"
                 android:paddingStart="6dp" />
 
@@ -79,7 +79,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="370dp"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView

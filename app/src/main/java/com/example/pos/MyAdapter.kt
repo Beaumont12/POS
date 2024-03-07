@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,13 +67,14 @@ class MyAdapter(
 
     private fun updateButtons(holder: ViewHolder, variations: Map<String, Int>) {
         val layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            50.dpToPx(), // Set the width to a fixed value (60dp in this case)
+            50.dpToPx() // Set the height to a fixed value (60dp in this case)
         )
 
         variations.forEach { (size, _) ->
             val button = Button(context)
             button.text = size
+            button.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
             button.setTextColor(ContextCompat.getColor(context, R.color.black))
             button.background = getButtonBackground()
             button.elevation = 10.dpToPx().toFloat()

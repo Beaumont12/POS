@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="395dp"
+    android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="20dp"
     android:padding="8dp"
+    android:layout_gravity="center"
     app:cardElevation="8dp"
     app:cardCornerRadius="20dp"
     app:cardBackgroundColor="#F1EFEF">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:gravity="center"
         android:background="#F2F1F3"
         android:padding="10dp">
 
@@ -20,88 +22,100 @@
             android:id="@+id/add_cart"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="280dp"
-            android:src="@drawable/cart"
+            android:layout_marginStart="163dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/circle_add_cart"
             android:elevation="1dp"
-            android:background="@drawable/circle_add_cart"/>
-        <View
-            android:id="@+id/blank"
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:src="@drawable/cart" />
+
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/item_image"
-            android:layout_width="325dp"
+            android:layout_width="200dp"
             android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="20dp"
             android:src="@drawable/whitemochafrappe"
-            android:layout_below="@id/blank"
-            android:scaleType="fitCenter"
             app:shapeAppearanceOverlay="@style/roundedbg"
-            android:layout_gravity="center_horizontal"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- Product Name -->
         <TextView
             android:id="@+id/text_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:layout_below="@id/item_image"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="4dp"
-            android:layout_marginTop="10dp"/>
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_image"
+             />
 
         <!-- Price -->
         <TextView
             android:id="@+id/text_prices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:textSize="14sp"
-            android:layout_alignBaseline="@id/text_product_name"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"/>
+            app:layout_constraintTop_toBottomOf="@id/item_image"
+            app:layout_constraintStart_toEndOf="@id/text_product_name"/>
 
         <!-- Category -->
         <TextView
             android:id="@+id/text_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textSize="14sp"
-            android:layout_below="@id/text_product_name"
-            android:layout_marginTop="5dp"/>
+            app:layout_constraintTop_toBottomOf="@id/text_product_name"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <!-- Button to switch between hot and iced variations -->
+
         <Button
             android:id="@+id/button_hot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hot"
+            android:gravity="center"
+            android:layout_marginTop="9dp"
             android:elevation="10dp"
-            android:layout_marginStart="75dp"
-            android:layout_below="@id/text_category"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"/>
+            android:text="Hot"
+            app:layout_constraintEnd_toStartOf="@id/button_iced"
+            app:layout_constraintTop_toBottomOf="@id/text_category"
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <Button
             android:id="@+id/button_iced"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Iced"
-            android:elevation="10dp"
-            android:layout_below="@id/text_category"
             android:layout_marginTop="8dp"
-            android:layout_toEndOf="@id/button_hot"/>
+            android:elevation="10dp"
+            android:text="Iced"
+            app:layout_constraintTop_toBottomOf="@id/text_category"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_hot"/>
 
         <!-- Container for size buttons -->
         <LinearLayout
-            android:layout_marginStart="35dp"
             android:id="@+id/size_buttons_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_below="@id/button_hot"
-            android:layout_marginTop="8dp"/>
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_iced"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
