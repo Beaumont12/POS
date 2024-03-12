@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Settings"
-    android:background="@color/white"
+    tools:context=".SettingsFragment"
+    android:background="#F1EFEF"
     android:layout_gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:padding="20dp"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_marginBottom="60dp"
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
@@ -20,62 +21,170 @@
             android:layout_margin="10dp"
             android:layout_gravity="center_vertical"
             app:cardElevation="5dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp">
-
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/user_image"
-                    android:layout_width="150dp"
-                    android:layout_margin="20dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/imagetest"
-                    android:scaleType="fitXY"
-                    app:shapeAppearanceOverlay="@style/circlebg"
-                    android:layout_gravity="center_horizontal"/>
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/edit_text_btn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/edit_text"
-                    android:layout_marginTop="-55dp"
-                    android:layout_marginStart="45dp"
-                    app:shapeAppearanceOverlay="@style/circlebg" />
-
-                <TextView
-                    android:id="@+id/staff_name"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Relgin Paloma"
-                    android:layout_marginTop="20dp"
-                    android:textFontWeight="900"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="20sp"/>
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Cashier"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/black"/>
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/user_image"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="15dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/logo"
+                        app:layout_constraintBottom_toTopOf="@id/staff_name"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/circlebg" />
 
+                    <TextView
+                        android:id="@+id/staff_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Relgin Paloma"
+                        android:textFontWeight="900"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/textView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Cashier"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toTopOf="@id/view8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/staff_name" />
+
+                    <View
+                        android:id="@+id/view8"
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/info_button"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/info_button"
+                        android:layout_width="270dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/image_corner"
+                        android:drawableStart="@drawable/baseline_person_24"
+                        android:paddingStart="30dp"
+                        android:text="Account Info"
+                        app:layout_constraintBottom_toTopOf="@id/view9"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+                    <View
+                        android:id="@+id/view9"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        app:layout_constraintBottom_toTopOf="@id/about_button"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/info_button" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/about_button"
+                        android:layout_width="270dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/image_corner"
+                        android:drawableStart="@drawable/baseline_info_24"
+                        android:paddingStart="30dp"
+                        android:text="About"
+                        app:layout_constraintBottom_toTopOf="@id/view10"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+                    <View
+                        android:id="@+id/view10"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/developers_button"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/about_button" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/developers_button"
+                        android:layout_width="270dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/image_corner"
+                        android:drawableStart="@drawable/baseline_android_24"
+                        android:paddingStart="30dp"
+                        android:text="Developers"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view10"
+                        app:layout_constraintBottom_toTopOf="@id/view11"/>
+
+                    <View
+                        android:id="@+id/view11"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/logout_button"
+                        app:layout_constraintTop_toBottomOf="@id/developers_button"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/logout_button"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/print_button"
+                        android:text="Log Out"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/view11" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="5dp">
+
+            <FrameLayout
+                android:id="@+id/settings_frame"
+                android:padding="10dp"
+                android:foregroundGravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>

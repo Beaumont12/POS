@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.settings -> {
-                    replaceFragment(Settings())
+                    replaceFragment(SettingsFragment())
                     true
                 }
                 else -> false

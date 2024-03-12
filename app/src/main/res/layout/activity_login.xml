@@ -33,6 +33,7 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins"
                 android:padding="15dp"
+                android:layout_marginBottom="-10dp"
                 android:text="Winzen's Cafe"
                 android:textColor="#203A36"
                 android:textSize="40sp"
@@ -44,7 +45,6 @@
                 android:text="Login to your account"
                 android:layout_margin="10dp"
                 android:textSize="16sp"
-
                 android:fontFamily="@font/poppins"/>
 
             <EditText
@@ -113,7 +113,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"/>
+                android:layout_height="15dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_button"

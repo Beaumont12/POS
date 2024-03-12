@@ -87,7 +87,7 @@ class Order : Fragment() {
 
                     orderData?.let { data ->
                         data.orderNumber = orderNumber
-                        val orderListData = mutableMapOf<String, OrderList>() // Change to Map
+                        val orderListData = mutableMapOf<String, OrderList>()
                         orderSnapshot.children.forEach { orderItemSnapshot ->
                             val key = orderItemSnapshot.key
                             if (key != null && key.startsWith("Order_")) {
@@ -96,18 +96,21 @@ class Order : Fragment() {
                                 val quantity = orderItemSnapshot.child("Quantity").getValue(Int::class.java) ?: 0
                                 val size = orderItemSnapshot.child("Size").getValue(String::class.java) ?: ""
                                 val orderItem = OrderList(Price = price, ProductName = productName, Quantity = quantity, Size = size)
-                                orderListData[key] = orderItem // Store in map with key
+                                orderListData[key] = orderItem
                             }
                         }
-                        data.orderItems = orderListData // Set the order list data for this OrderData object
+                        data.orderItems = orderListData
                         orderList.add(data)
                     }
                 }
 
-                this@Order.orderList = orderList // Assign to global variable
-                orderPlacedAdapter = OrderPlacedAdapter(orderList, databaseReference)
-                recyclerView.layoutManager = GridLayoutManager(requireActivity(), 3)
-                recyclerView.adapter = orderPlacedAdapter
+                // Check if the fragment is attached to an activity before accessing it
+                if (isAdded) {
+                    this@Order.orderList = orderList
+                    orderPlacedAdapter = OrderPlacedAdapter(orderList, databaseReference)
+                    recyclerView.layoutManager = GridLayoutManager(requireActivity(), 3)
+                    recyclerView.adapter = orderPlacedAdapter
+                }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -117,7 +120,7 @@ class Order : Fragment() {
     }
 
     private fun filterOrdersByPreference(preference: String) {
-        if (::orderPlacedAdapter.isInitialized) { // Check if initialized
+        if (::orderPlacedAdapter.isInitialized && ::orderList.isInitialized) {
             val filteredList = orderList.filter { it.Preference == preference }
             orderPlacedAdapter.updateData(filteredList)
         }

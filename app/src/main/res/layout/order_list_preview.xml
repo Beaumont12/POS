@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/text_product_name"
-                android:layout_width="110dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:maxLines="2"

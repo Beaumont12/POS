@@ -16,11 +16,10 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal">
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/logo"
@@ -28,33 +27,41 @@
                 android:layout_height="100dp"
                 android:layout_margin="20dp"
                 android:elevation="20dp"
-                android:src="@drawable/logo" />
+                android:src="@drawable/logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/search_bar"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
-                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/search_bg"
                 android:drawableStart="@drawable/baseline_search_24"
                 android:elevation="12dp"
-                android:ems="17"
+                android:fitsSystemWindows="true"
                 android:hint=" Search"
-                android:paddingStart="6dp" />
-
-            <View
-                android:layout_width="20dp"
-                android:layout_height="match_parent"/>
+                android:maxEms="25"
+                android:minEms="20"
+                android:paddingStart="6dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/choose_button_group"
+                app:layout_constraintStart_toEndOf="@id/logo"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButtonToggleGroup
                 android:id="@+id/choose_button_group"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:singleSelection="true"
                 android:padding="10dp"
-                android:layout_gravity="center"
-                app:checkedButton="@id/dinein_button">
+                app:checkedButton="@id/dinein_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/search_bar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:singleSelection="true">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/dinein_button"
@@ -66,29 +73,30 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/takeout_button"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Take Out"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
-
+                    app:layout_constraintStart_toEndOf="@id/dinein_button" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="370dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleViewOrder"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:nestedScrollingEnabled="true"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>

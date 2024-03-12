@@ -41,6 +41,8 @@ class Login : AppCompatActivity() {
         // Initially set the password field to use PasswordTransformationMethod
         passwordField.transformationMethod = PasswordTransformationMethod.getInstance()
 
+        sharedPreferences = getSharedPreferences("user_account", MODE_PRIVATE)
+
         loginButton.setOnClickListener {
             val staffId = idField.text.toString()
             val email = emailField.text.toString()
@@ -86,6 +88,8 @@ class Login : AppCompatActivity() {
                             // Retrieve other user data if needed
                             val age = staffSnapshot.child("Age").value.toString()
                             val name = staffSnapshot.child("Name").value.toString()
+
+                            saveLoggedInUserName(name)
 
                             val intent = Intent(this@Login, MainActivity::class.java)
                             intent.putExtra("loggedInUserName", name)
