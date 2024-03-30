@@ -48,12 +48,9 @@
                 android:background="@drawable/search_bg"
                 android:drawableStart="@drawable/baseline_search_24"
                 android:elevation="12dp"
-                android:layout_marginEnd="10dp"
-                android:fitsSystemWindows="true"
                 android:hint=" Search"
-                android:maxEms="20"
-                android:minEms="16"
                 android:paddingStart="6dp"
+                android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/logo"
@@ -78,170 +75,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
-
-                    <TextView
-                        android:id="@+id/all_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    All    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <View
-                        android:id="@+id/view1"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/all_category"/>
-
-                    <TextView
-                        android:id="@+id/specials_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    Specials    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view1"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <View
-                        android:id="@+id/view2"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/specials_category"/>
-
-                    <TextView
-                        android:id="@+id/coffee_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    Coffee    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view2"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <View
-                        android:id="@+id/view3"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/coffee_category"/>
-
-                    <TextView
-                        android:id="@+id/tea_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    Tea    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view3"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <View
-                        android:id="@+id/view4"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tea_category"/>
-
-                    <TextView
-                        android:id="@+id/frappe_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    Frappe    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view4"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <View
-                        android:id="@+id/view5"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/frappe_category"/>
-
-                    <TextView
-                        android:id="@+id/lemonade_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    Lemonade    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view5"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <View
-                        android:id="@+id/view6"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/lemonade_category"/>
-
-                    <TextView
-                        android:id="@+id/pastries_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    Pastries    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view6"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                    <View
-                        android:id="@+id/view7"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/pastries_category"/>
-
-                    <TextView
-                        android:id="@+id/tumblers_category"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/textview_selector"
-                        android:text="    Others    "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        app:layout_constraintStart_toEndOf="@id/view7"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/categories_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"/>
 
             </HorizontalScrollView>
 

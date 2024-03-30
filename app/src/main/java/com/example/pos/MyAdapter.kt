@@ -10,9 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class MyAdapter(
     private val context: Context,
@@ -31,6 +33,9 @@ class MyAdapter(
         val product = productList[position]
         this.addToCartClickListener = addToCartClickListener
 
+        Glide.with(context)
+            .load(product.imageURL)
+            .into(holder.itemImage)
 
         holder.textProductName.text = "${product.productName}  ${getFormattedPrice(product.hotVariations.values.firstOrNull()) ?: "-"}"
         holder.textCategory.text = "Category: ${product.category.uppercase()}"
@@ -116,6 +121,7 @@ class MyAdapter(
         val buttonHot: Button = itemView.findViewById(R.id.button_hot)
         val buttonIced: Button = itemView.findViewById(R.id.button_iced)
         val addToCartButton: ImageButton = itemView.findViewById(R.id.add_cart)
+        val itemImage: ImageView = itemView.findViewById(R.id.item_image)
     }
 
     fun updateProductList(newProductList: List<Product>) {

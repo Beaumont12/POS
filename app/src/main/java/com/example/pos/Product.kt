@@ -5,5 +5,6 @@ data class Product(
     val category: String,
     val hotVariations: Map<String, Int>,
     val icedVariations: Map<String, Int>,
-    var isHot: Boolean
+    var isHot: Boolean,
+    val imageURL: String
 )

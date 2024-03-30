@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +13,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +45,8 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
     private var customerName: String = ""
     private var selectedDiscount: String = "None"
     private var lastClickedTemperature: String = "hot"
-    private var preference: String = "Dine In" // Default preference is Dine In
+    private var preference: String = "Dine In"
+    private lateinit var categoryLayout: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,7 +57,12 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
         adapter = MyAdapter(requireContext(), mutableListOf(), this)
         orderAdapter = OrderAdapter(requireContext(), mutableListOf(), this)
         recyclerView.adapter = adapter
-        databaseRef = FirebaseDatabase.getInstance().reference.child("products") // Initialize databaseRef
+        databaseRef = FirebaseDatabase.getInstance().reference.child("products")
+
+        categoryLayout = view.findViewById(R.id.categories_layout)
+
+        // Fetch categories from Firebase
+        fetchCategoriesFromFirebase()
         return view
     }
 
@@ -126,48 +137,6 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
             }
         })
 
-        // Click listener for "All" category
-        view.findViewById<View>(R.id.all_category).setOnClickListener {
-            adapter.updateProductList(allProducts)
-        }
-
-        // Click listener for "Specials" category
-        view.findViewById<View>(R.id.specials_category).setOnClickListener {
-            val specialsProducts = allProducts.filter { it.category == "specials" }
-            adapter.updateProductList(specialsProducts.toMutableList())
-        }
-
-        // Click listener for "Coffee" category (example)
-        view.findViewById<View>(R.id.coffee_category).setOnClickListener {
-            val coffeeProducts = allProducts.filter { it.category == "coffee" }
-            adapter.updateProductList(coffeeProducts.toMutableList())
-        }
-
-        view.findViewById<View>(R.id.tea_category).setOnClickListener {
-            val teaProducts = allProducts.filter { it.category == "tea" }
-            adapter.updateProductList(teaProducts.toMutableList())
-        }
-
-        view.findViewById<View>(R.id.lemonade_category).setOnClickListener {
-            val lemonadeProducts = allProducts.filter { it.category == "lemonade" }
-            adapter.updateProductList(lemonadeProducts.toMutableList())
-        }
-
-        view.findViewById<View>(R.id.frappe_category).setOnClickListener {
-            val frappeProducts = allProducts.filter { it.category == "frappe" }
-            adapter.updateProductList(frappeProducts.toMutableList())
-        }
-
-        view.findViewById<View>(R.id.tumblers_category).setOnClickListener {
-            val tumblersProducts = allProducts.filter { it.category == "tumblers" }
-            adapter.updateProductList(tumblersProducts.toMutableList())
-        }
-
-        view.findViewById<View>(R.id.pastries_category).setOnClickListener {
-            val pastriesProducts = allProducts.filter { it.category == "pastries" }
-            adapter.updateProductList(pastriesProducts.toMutableList())
-        }
-
         // Add click listener to clear all orders
         view.findViewById<TextView>(R.id.clear_all).setOnClickListener {
             orderList.clear()
@@ -231,6 +200,76 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
             }
             else {
                 confirmOrderWithDialog(orderNumber)
+            }
+        }
+    }
+
+    private fun fetchCategoriesFromFirebase() {
+        val databaseRef = FirebaseDatabase.getInstance().reference.child("categories")
+        databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val categories = mutableListOf<String>()
+                dataSnapshot.children.forEach { categorySnapshot ->
+                    val categoryName = categorySnapshot.child("Name").getValue(String::class.java)
+                    categoryName?.let {
+                        categories.add(it)
+                    }
+                }
+                // Once categories are fetched, dynamically add TextViews for each category
+                addCategoryTextViews(categories)
+
+                setUpCategoryTextViewListeners()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle errors
+                Log.e("Firebase", "Error fetching categories: ${databaseError.message}")
+            }
+        })
+    }
+
+    private fun addCategoryTextViews(categories: List<String>) {
+        val categoryLayout: LinearLayout = view?.findViewById(R.id.categories_layout) ?: return
+        val layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        layoutParams.setMargins(16, 0, 16, 0) // Adjust margins as needed
+
+        // Add "All" category TextView
+        val allTextView = TextView(requireContext())
+        allTextView.text = "All"
+        allTextView.setPadding(16, 8, 16, 8) // Adjust padding as needed
+        allTextView.setBackgroundResource(R.drawable.textview_selector) // Apply background drawable
+        allTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white)) // Set text color
+        allTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F) // Set text size
+        allTextView.layoutParams = layoutParams
+        categoryLayout.addView(allTextView)
+
+        // Add other category TextViews
+        categories.forEach { categoryName ->
+            val categoryTextView = TextView(requireContext())
+            categoryTextView.text = categoryName
+            categoryTextView.setPadding(16, 8, 16, 8) // Adjust padding as needed
+            categoryTextView.setBackgroundResource(R.drawable.textview_selector) // Apply background drawable
+            categoryTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white)) // Set text color
+            categoryTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24F) // Set text size
+            categoryTextView.layoutParams = layoutParams
+            categoryLayout.addView(categoryTextView)
+        }
+    }
+
+    private fun setUpCategoryTextViewListeners() {
+        // Set up click listeners for dynamically added category TextViews
+        categoryLayout.children.forEach { categoryTextView ->
+            categoryTextView.setOnClickListener {
+                val categoryName = (categoryTextView as TextView).text.toString()
+                val filteredProducts = if (categoryName == "All") {
+                    allProducts // Show all products if "All" is selected
+                } else {
+                    allProducts.filter { it.category == categoryName }
+                }
+                adapter.updateProductList(filteredProducts.toMutableList())
             }
         }
     }
@@ -323,7 +362,9 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
                         icedVariations[size] = price
                     }
 
-                    val product = Product(productName, category, hotVariations, icedVariations, isHot = true)
+                    val imageURL = productSnapshot.child("imageURL").getValue(String::class.java) ?: ""
+
+                    val product = Product(productName, category, hotVariations, icedVariations, isHot = true, imageURL)
                     productList.add(product)
                 }
                 allProducts = productList
