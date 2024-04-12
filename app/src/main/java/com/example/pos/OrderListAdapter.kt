@@ -28,10 +28,12 @@ class OrderListAdapter(private val orderList: List<OrderList>) : RecyclerView.Ad
         private val productSizeTextView: TextView = itemView.findViewById(R.id.text_product_size)
         private val productPriceTextView: TextView = itemView.findViewById(R.id.text_prices)
         private val productTotalTextView: TextView = itemView.findViewById(R.id.total)
+        private val productVariation: TextView = itemView.findViewById(R.id.product_variation)
 
         fun bind(orderItem: OrderList) {
             productNameTextView.text = orderItem.ProductName
             productQuantityTextView.text = orderItem.Quantity.toString()
+            productVariation.text = orderItem.Variation
             productSizeTextView.text = orderItem.Size
             productPriceTextView.text = orderItem.Price.toString()
             productTotalTextView.text = (orderItem.Price!! * orderItem.Quantity!!).toString()

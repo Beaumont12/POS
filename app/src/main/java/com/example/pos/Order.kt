@@ -95,7 +95,8 @@ class Order : Fragment() {
                                 val productName = orderItemSnapshot.child("ProductName").getValue(String::class.java) ?: ""
                                 val quantity = orderItemSnapshot.child("Quantity").getValue(Int::class.java) ?: 0
                                 val size = orderItemSnapshot.child("Size").getValue(String::class.java) ?: ""
-                                val orderItem = OrderList(Price = price, ProductName = productName, Quantity = quantity, Size = size)
+                                val temperature = orderItemSnapshot.child("Variation").getValue(String::class.java) ?: ""
+                                val orderItem = OrderList(Price = price, ProductName = productName, Quantity = quantity, Size = size, Variation = temperature)
                                 orderListData[key] = orderItem
                             }
                         }

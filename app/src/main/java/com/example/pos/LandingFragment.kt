@@ -47,6 +47,7 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
     private var lastClickedTemperature: String = "hot"
     private var preference: String = "Dine In"
     private lateinit var categoryLayout: LinearLayout
+    private var productCache: MutableList<Product>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,6 +98,14 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
                     else -> "Dine In" // Default to Dine In if none selected
                 }
             }
+        }
+
+        // Check if productCache is null and fetch data if needed
+        if (productCache == null) {
+            fetchAllProducts(databaseRef)
+        } else {
+            // If cache is available, use it to update the adapter
+            adapter.updateProductList(productCache!!)
         }
 
         val customerNameEditText = view.findViewById<EditText>(R.id.customer_name)
@@ -274,22 +283,19 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
         }
     }
 
-    override fun onAddToCartClicked(product: Product) {
-        // Get the displayed price
-        val displayedPrice = getDisplayedPriceFromRecyclerView(product)
 
-        // Get the size based on the displayed price
-        val size = getSizeBasedOnDisplayedPrice(product, displayedPrice)
+    override fun onAddToCartClicked(product: Product, temperature: String, size: String, price: Int) {
+        Log.d("DEBUG", "Add to Cart clicked for product: ${product.productName}, Temperature: $temperature, Size: $size, Price: $price")
 
-        // Find if the item with the same product name and size already exists in the order list
-        val existingOrderItem = orderList.find { it.productName == product.productName && it.size == size }
+        // Find if the item with the same product name, temperature, and size already exists in the order list
+        val existingOrderItem = orderList.find { it.productName == product.productName && it.temperature == temperature && it.size == size }
 
         if (existingOrderItem != null) {
             // If the item already exists, increment its quantity
             existingOrderItem.quantity++
         } else {
             // If the item doesn't exist, add it to the order list
-            orderList.add(OrderItem(product.productName, size, displayedPrice, 1))
+            orderList.add(OrderItem(product.productName, size, price, 1, temperature))
         }
 
         // Update the order adapter and calculate/display totals
@@ -297,51 +303,12 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
         calculateAndDisplayTotals(orderList)
     }
 
-    private fun getSizeBasedOnDisplayedPrice(product: Product, displayedPrice: Int): String {
-        val variations = if (product.isHot) product.hotVariations else product.icedVariations
-
-        for ((size, price) in variations) {
-            if (price == displayedPrice) {
-                return size
-            }
-        }
-
-        // If no match is found, you can handle this case based on your requirements
-        // For example, return an empty string or a default size
-        return ""
-    }
-
-    private fun getDisplayedPriceFromRecyclerView(product: Product): Int {
-        val recyclerView = recyclerView  // Reference to your RecyclerView instance
-
-        // Iterate through the RecyclerView items to find the one corresponding to the given product
-        for (i in 0 until recyclerView.childCount) {
-            val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as? MyAdapter.ViewHolder
-            viewHolder?.let {
-                val productName = it.textProductName.text.toString()
-
-                // Check if the product name matches
-                if (productName.contains(product.productName)) {
-                    val sizeAndPrice = productName.split("  ").lastOrNull() ?: ""
-                    val price = sizeAndPrice.split(" - ").lastOrNull()?.substring(1)?.toIntOrNull() ?: 0
-
-                    if (price > 0) {
-                        // If the price is valid, return it
-                        return price
-                    }
-                }
-            }
-        }
-
-        // If the displayed price is not found, return a default value
-        return 0
-    }
-
-
     private fun fetchAllProducts(databaseRef: DatabaseReference) {
         databaseRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val productList = mutableListOf<Product>()
+                val productCount = dataSnapshot.childrenCount.toInt() // Get the number of products
+                Log.d("Debug", "Number of products fetched: $productCount")
                 for (productSnapshot in dataSnapshot.children) {
                     val productName = productSnapshot.child("Name").getValue(String::class.java) ?: ""
                     val category = productSnapshot.child("Category").getValue(String::class.java) ?: ""
@@ -367,6 +334,7 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
                     val product = Product(productName, category, hotVariations, icedVariations, isHot = true, imageURL)
                     productList.add(product)
                 }
+                productCache = productList
                 allProducts = productList
                 adapter.updateProductList(allProducts)
             }
@@ -468,6 +436,7 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
         orderList.forEachIndexed { index, orderItem ->
             val orderItemMap = mutableMapOf<String, Any>()
             orderItemMap["ProductName"] = orderItem.productName
+            orderItemMap["Variation"] = orderItem.temperature
             orderItemMap["Size"] = orderItem.size
             orderItemMap["Price"] = orderItem.price
             orderItemMap["Quantity"] = orderItem.quantity

@@ -82,26 +82,38 @@ class Login : AppCompatActivity() {
                     if (staffKey == staffId) {
                         val staffEmail = staffSnapshot.child("Email").value.toString()
                         val staffPassword = staffSnapshot.child("Password").value.toString()
+                        val staffRole = staffSnapshot.child("Role").value.toString() // Assuming Role field is present
+
                         if (email == staffEmail && password == staffPassword) {
-                            // Email and password match, login successful
+                            // Email and password match
                             loggedIn = true
-                            // Retrieve other user data if needed
-                            val age = staffSnapshot.child("Age").value.toString()
-                            val name = staffSnapshot.child("Name").value.toString()
 
-                            saveLoggedInUserName(name)
+                            // Check role
+                            if (staffRole == "Admin" || staffRole == "Cashier") {
+                                // User is allowed to log in
+                                val age = staffSnapshot.child("Age").value.toString()
+                                val name = staffSnapshot.child("Name").value.toString()
 
-                            val intent = Intent(this@Login, MainActivity::class.java)
-                            intent.putExtra("loggedInUserName", name)
-                            intent.putExtra("loggedInUserAge", age)
-                            startActivity(intent)
-                            finish()
+                                saveLoggedInUserName(name)
+
+                                val intent = Intent(this@Login, MainActivity::class.java)
+                                intent.putExtra("loggedInUserName", name)
+                                intent.putExtra("loggedInUserAge", age)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                // User does not have appropriate role
+                                Toast.makeText(baseContext, "You do not have permission to log in.", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            // Email and password do not match
+                            Toast.makeText(baseContext, "Invalid email or password.", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
                 if (!loggedIn) {
-                    // No staff found with matching staff ID, email, and password
-                    Toast.makeText(baseContext, "Invalid staff ID, email, or password.", Toast.LENGTH_SHORT).show()
+                    // No staff found with matching staff ID
+                    Toast.makeText(baseContext, "Invalid staff ID.", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -111,6 +123,7 @@ class Login : AppCompatActivity() {
             }
         })
     }
+
 
     private fun saveLoggedInUserName(name: String) {
         val editor = sharedPreferences.edit()

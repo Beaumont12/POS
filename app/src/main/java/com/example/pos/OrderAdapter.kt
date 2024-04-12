@@ -30,6 +30,7 @@ class OrderAdapter(
         holder.textProductName.text = orderItem.productName
         holder.textPrice.text = "P${orderItem.price}" // Display price with 'P'
         holder.textSize.text = orderItem.size
+        holder.textTemp.text = orderItem.temperature
         holder.textQuantity.text = orderItem.quantity.toString()
 
         holder.addButton.setOnClickListener {
@@ -67,6 +68,7 @@ class OrderAdapter(
         val textPrice: TextView = itemView.findViewById(R.id.text_prices)
         val textSize: TextView = itemView.findViewById(R.id.text_product_size)
         val textQuantity: TextView = itemView.findViewById(R.id.product_quantity)
+        val textTemp : TextView = itemView.findViewById(R.id.text_product_temp)
         val addButton: Button = itemView.findViewById(R.id.add_button)
         val minusButton: Button = itemView.findViewById(R.id.minus_button)
     }

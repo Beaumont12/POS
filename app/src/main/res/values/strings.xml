@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">POS</string>
+    <string name="app_name">Winzen POS</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="print_bills">Print Bills</string>
+    <string name="print_bills">Confirm</string>
 
     <string-array name="discount_options">
         <item>None</item>
@@ -11,4 +11,7 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="history_text">Winzen’s Café</string>
+    <string name="history_content">       It humbly began with an idea of establishing a warehouse, given that the place is really spacious. Later on, the owner thought of making it a coffee shop. Being a businessman, many of his associates had a penchant for coffee, and since his family also shared a love for it, he saw the opportunity to create his own coffee establishment.</string>
+
 </resources>

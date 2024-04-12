@@ -1,9 +1,11 @@
 package com.example.pos
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +30,12 @@ class History : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         historyAdapter = HistoryAdapter(emptyList())
         recyclerView.adapter = historyAdapter
+        val printButton = view.findViewById<Button>(R.id.print_button)
+
+        printButton.setOnClickListener {
+            // Start PrintActivity when the button is clicked
+            startActivity(Intent(requireContext(), PrintActivity::class.java))
+        }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("history")
         databaseReference.addValueEventListener(object : ValueEventListener {

@@ -4,5 +4,6 @@ data class OrderList(
     val Price: Double? = 0.0,
     val ProductName: String? = "",
     val Quantity: Int? = 0,
-    val Size: String? = ""
+    val Size: String? = "",
+    val Variation: String = "",
 )

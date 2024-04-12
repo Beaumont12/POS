@@ -5,6 +5,7 @@ data class OrderItem(
     val size: String, // Size is now the key
     val price: Int, // Price corresponding to the size
     var quantity: Int,
+    var temperature: String,
     var deleted: Boolean = false
 ) {
     override fun equals(other: Any?): Boolean {
