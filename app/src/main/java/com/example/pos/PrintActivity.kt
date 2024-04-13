@@ -140,16 +140,6 @@
                 itemNameTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
                 itemLayout.addView(itemNameTextView)
 
-                val itemVariationTextView = TextView(this)
-                itemVariationTextView.layoutParams = LinearLayout.LayoutParams(
-                    0,
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    1f
-                )
-                itemVariationTextView.text = orderItems.variation
-                itemVariationTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-                itemLayout.addView(itemVariationTextView)
-
                 val itemQuantityTextView = TextView(this)
                 itemQuantityTextView.layoutParams = LinearLayout.LayoutParams(
                     0,
@@ -159,6 +149,16 @@
                 itemQuantityTextView.text = orderItems.quantity.toString()
                 itemQuantityTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
                 itemLayout.addView(itemQuantityTextView)
+
+                val itemVariationTextView = TextView(this)
+                itemVariationTextView.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                itemVariationTextView.text = orderItems.variation
+                itemVariationTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                itemLayout.addView(itemVariationTextView)
 
                 val itemSizeTextView = TextView(this)
                 itemSizeTextView.layoutParams = LinearLayout.LayoutParams(

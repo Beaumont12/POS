@@ -1,5 +1,6 @@
 package com.example.pos
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -33,8 +34,19 @@ class History : Fragment() {
         val printButton = view.findViewById<Button>(R.id.print_button)
 
         printButton.setOnClickListener {
-            // Start PrintActivity when the button is clicked
-            startActivity(Intent(requireContext(), PrintActivity::class.java))
+            // Build the confirmation dialog
+            AlertDialog.Builder(requireContext())
+                .setTitle("Confirm Print Transaction")
+                .setMessage("Are you sure you want to print?")
+                .setPositiveButton("Print") { dialog, _ ->
+                    // Start PrintActivity when the user confirms
+                    startActivity(Intent(requireContext(), PrintActivity::class.java))
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("history")
@@ -57,6 +69,7 @@ class History : Fragment() {
                     val historyData = HistoryData(orderNumber, staffName, orderDateTime, total, orderItems)
                     historyList.add(historyData)
                 }
+                historyList.reverse()
                 historyAdapter.updateData(historyList)
             }
 
