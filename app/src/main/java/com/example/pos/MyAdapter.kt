@@ -44,6 +44,8 @@ class MyAdapter(
         holder.textProductName.text = product.productName
         holder.textPrices.text = getFormattedPrice(product.hotVariations.values.firstOrNull()) ?: ""
         holder.textCategory.text = "Category: ${product.category.uppercase()}"
+        updateStockStatus(holder, product.stockStatus)
+
 
         // Set sizes buttons
         holder.sizeButtonsContainer.removeAllViews()
@@ -82,6 +84,16 @@ class MyAdapter(
             }
         }
     }
+
+    private fun updateStockStatus(holder: ViewHolder, stockStatus: String) {
+        if (stockStatus.equals("Out of Stock", ignoreCase = true)) {
+            holder.stockStatus.setTextColor(ContextCompat.getColor(context, R.color.red))
+        } else {
+            holder.stockStatus.setTextColor(ContextCompat.getColor(context, R.color.green))
+        }
+        holder.stockStatus.text = stockStatus
+    }
+
 
     interface OnAddToCartClickListener {
         fun onAddToCartClicked(product: Product, temperature: String, size: String, price: Int)
@@ -148,6 +160,7 @@ class MyAdapter(
         val buttonIced: Button = itemView.findViewById(R.id.button_iced)
         val addToCartButton: ImageButton = itemView.findViewById(R.id.add_cart)
         val itemImage: ImageView = itemView.findViewById(R.id.item_image)
+        val stockStatus: TextView = itemView.findViewById(R.id.stock_status)
     }
 
     fun updateProductList(newProductList: List<Product>) {

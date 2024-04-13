@@ -6,5 +6,6 @@ data class Product(
     val hotVariations: Map<String, Int>,
     val icedVariations: Map<String, Int>,
     var isHot: Boolean,
-    val imageURL: String
+    val imageURL: String,
+    val stockStatus: String,
 )

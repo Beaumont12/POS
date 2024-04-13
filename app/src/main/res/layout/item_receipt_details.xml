@@ -2,6 +2,7 @@
     android:id="@+id/item_receipt_detail_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:padding="8dp"
     android:textSize="12sp"
     android:textColor="@android:color/black"/>

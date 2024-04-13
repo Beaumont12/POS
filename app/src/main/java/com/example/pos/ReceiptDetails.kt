@@ -18,5 +18,6 @@ data class OrderDetails(
     val price: Double = 0.0,
     val productName: String = "",
     val quantity: Int = 0,
-    val size: String = ""
+    val size: String = "",
+    val variation: String = ""
 )

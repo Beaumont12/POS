@@ -287,6 +287,12 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
     override fun onAddToCartClicked(product: Product, temperature: String, size: String, price: Int) {
         Log.d("DEBUG", "Add to Cart clicked for product: ${product.productName}, Temperature: $temperature, Size: $size, Price: $price")
 
+        if (product.stockStatus.equals("Out of Stock", ignoreCase = true)) {
+            // If the product is out of stock, show a toast and do not add it to the cart
+            Toast.makeText(context, "This item is currently out of stock", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // Find if the item with the same product name, temperature, and size already exists in the order list
         val existingOrderItem = orderList.find { it.productName == product.productName && it.temperature == temperature && it.size == size }
 
@@ -330,8 +336,9 @@ class LandingFragment(private val loggedInUserName: String) : Fragment(), MyAdap
                     }
 
                     val imageURL = productSnapshot.child("imageURL").getValue(String::class.java) ?: ""
+                    val stockStatus = productSnapshot.child("stockStatus").getValue(String::class.java) ?: ""
 
-                    val product = Product(productName, category, hotVariations, icedVariations, isHot = true, imageURL)
+                    val product = Product(productName, category, hotVariations, icedVariations, isHot = true, imageURL, stockStatus)
                     productList.add(product)
                 }
                 productCache = productList

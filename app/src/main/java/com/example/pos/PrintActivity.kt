@@ -70,10 +70,22 @@
                     Log.d(TAG, "Snapshot: $snapshot")
                     if (snapshot.exists()) {
                         Log.d(TAG, "Number of children under history node: ${snapshot.childrenCount}")
+                        var grandTotal = 0.0
+                        var cashierName: String? = null
                         for (data in snapshot.children) {
                             Log.d(TAG, "Data key: ${data.key}, Data value: ${data.value}")
                             val receipt = data.getValue(ReceiptDetails::class.java)
-                            receipt?.let { displayReceipt(it) }
+                            receipt?.let {
+                                displayReceipt(it)
+                                grandTotal += it.total.toDouble() // Convert total to Double
+                                if (cashierName == null) {
+                                    // Set cashier name if not already set
+                                    cashierName = it.staffName
+                                }
+                            }
+                        }
+                        cashierName?.let {
+                            displayCashierAndTotal(it, grandTotal)
                         }
                     } else {
                         Log.d(TAG, "No data found")
@@ -84,6 +96,20 @@
                     Log.e(TAG, "fetchReceiptDetails() onCancelled: $error")
                 }
             })
+        }
+
+        private fun displayCashierAndTotal(cashierName: String, grandTotal: Double) {
+            val productDetailsLayout2 = findViewById<LinearLayout>(R.id.prod_details2)
+
+            // Display cashier name
+            val cashierTextView = TextView(this@PrintActivity)
+            cashierTextView.text = "Cashier: $cashierName"
+            productDetailsLayout2.addView(cashierTextView)
+
+            // Display grand total
+            val totalTextView = TextView(this@PrintActivity)
+            totalTextView.text = "Grand Total: $grandTotal"
+            productDetailsLayout2.addView(totalTextView)
         }
 
         private fun displayReceipt(receipt: ReceiptDetails) {
@@ -97,24 +123,76 @@
             dateTime.text = dateFormat.format(orderDate)
 
             val productDetailsLayout = findViewById<LinearLayout>(R.id.prod_details)
+            val productDetailsLayout2 = findViewById<LinearLayout>(R.id.prod_details2)
 
             // Iterate over order items and dynamically create TextViews
             for ((_, orderItems) in receipt.orderItems) {
-                val textView = TextView(this@PrintActivity)
-                textView.text =
-                    "${orderItems.productName} | ${orderItems.quantity} | ${orderItems.size} | ${orderItems.price} | ${orderItems.quantity * orderItems.price}"
-                productDetailsLayout.addView(textView)
+                val itemLayout = LinearLayout(this)
+                itemLayout.orientation = LinearLayout.HORIZONTAL
+
+                val itemNameTextView = TextView(this)
+                itemNameTextView.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                itemNameTextView.text = orderItems.productName
+                itemNameTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                itemLayout.addView(itemNameTextView)
+
+                val itemVariationTextView = TextView(this)
+                itemVariationTextView.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                itemVariationTextView.text = orderItems.variation
+                itemVariationTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                itemLayout.addView(itemVariationTextView)
+
+                val itemQuantityTextView = TextView(this)
+                itemQuantityTextView.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                itemQuantityTextView.text = orderItems.quantity.toString()
+                itemQuantityTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                itemLayout.addView(itemQuantityTextView)
+
+                val itemSizeTextView = TextView(this)
+                itemSizeTextView.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                itemSizeTextView.text = orderItems.size
+                itemSizeTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                itemLayout.addView(itemSizeTextView)
+
+                val itemPriceTextView = TextView(this)
+                itemPriceTextView.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                itemPriceTextView.text = orderItems.price.toString()
+                itemPriceTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                itemLayout.addView(itemPriceTextView)
+
+                val itemTotalTextView = TextView(this)
+                itemTotalTextView.layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                val itemTotal = orderItems.quantity * orderItems.price
+                itemTotalTextView.text = itemTotal.toString()
+                itemTotalTextView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+                itemLayout.addView(itemTotalTextView)
+
+                productDetailsLayout.addView(itemLayout)
             }
-
-            // Display cashier name and grand total
-            val cashierTextView = TextView(this@PrintActivity)
-            cashierTextView.text = "Cashier: ${receipt.staffName}"
-            productDetailsLayout.addView(cashierTextView)
-
-            val totalTextView = TextView(this@PrintActivity)
-            totalTextView.text = "Grand Total: ${receipt.total}"
-            productDetailsLayout.addView(totalTextView)
-
             productDetailsLayout.post {
                 // Print the receipt after the layout is drawn
                 printReceipt()

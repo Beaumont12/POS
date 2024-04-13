@@ -16,5 +16,5 @@
     <color name="yellow">#CEA517</color>
     <color name="green_pressed">#1D4F46</color> <!-- Change to your desired pressed color -->
     <color name="green_default">#ABE6E8E6</color> <!-- Change to your desired default color -->
-
+    <color name="red">#D32F2F</color>
 </resources>
